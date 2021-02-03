@@ -13,13 +13,23 @@ var app = new Vue({
     error: false,
     errorMessage: '',
     albums: [],
-    filterAlbums: [],
-    genres: ['Pop', 'Rock', 'Metal', 'Jazz', 'All'],
-    visible: '',
-    direction: 'left'
+    authors: [],
+    filterbyauthor: [],
+    direction: 'left',
+    visible: ''
   },
+  // Bonus
+  computed: {
+    getauthors: function getauthors() {
+      var albums = this.albums.map(function (element) {
+        return element.author;
+      });
+      albums.push("All");
+      return albums;
+    }
+  },
+  // /Bonus
   methods: {
-    //Al click del mouse, fa apparire e scomparire il menu dei generi musicali
     appear: function appear() {
       if (this.visible === 'active') {
         //reset
@@ -30,13 +40,12 @@ var app = new Vue({
         this.direction = 'right';
       }
     },
-    //Filtra gli album che corrispondono al genere selezionato 
-    filter: function filter(genre) {
-      this.filterAlbums = this.albums.filter(function (element) {
-        if (genre === 'All') {
+    filter: function filter(author) {
+      this.filterbyauthor = this.albums.filter(function (element) {
+        if (author === 'All') {
           return element;
         } else {
-          return element.genre === genre;
+          return element.author === author;
         }
       });
     }
@@ -44,10 +53,14 @@ var app = new Vue({
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('https://flynn.boolean.careers/exercises/api/array/music').then(function (response) {
-      var albums = response.data.response;
+    axios.get('http://localhost:8880/Esercizi/php-ajax-dischi/Milestone2/db.php', {
+      headers: {
+        'Authorization': '*'
+      }
+    }).then(function (response) {
+      var albums = response.data;
       _this.albums = albums;
-      _this.filterAlbums = albums;
+      _this.filterbyauthor = albums;
     })["catch"](function (error) {
       var errorCode = error.response.status;
       var errorText = error.response.statusText;
@@ -178,7 +191,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			return checkDeferredModules();
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkphp_ajax_dischi"] = self["webpackChunkphp_ajax_dischi"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkMilestone2"] = self["webpackChunkMilestone2"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 		

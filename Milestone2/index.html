@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Vue Js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+    <!-- Font- Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <!-- Style -->
+    <link rel="stylesheet" href="dist/css/app.css">
+    <title>Spotify - php - Ajax</title>
+</head>
+
+<body>
+    <div id="root">
+        <header>
+            <div v-if="!error" class="container navbar">
+                <img src="dist/img/logo.png" alt="logo" />
+                <ul class="menu">
+                    <li class="authors" v-for="(author, index) in getauthors" :class="visible" @click="filter(author)">
+                        {{author}}</li>
+                    <li class="btn" @click="appear()"><i :class="'fas fa-chevron-'+ direction"></i> Authors</li>
+                </ul>
+            </div>
+        </header>
+
+        <main v-if="!error" class="cds-container container">
+            <div class="cd" v-for="(album, index) in filterbyauthor">
+                <img :src="album.path" alt="">
+                <h3>{{album.album}}</h3>
+                <span class="author">{{album.author}}</span>
+                <span class="year">{{album.year}}</span>
+            </div>
+        </main>
+        <!-- Loading error display -->
+        <div v-else class="error">{{errorMessage}}</div>
+    </div>
+
+    <script src="src/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+.cds-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 100px 0;
+    .cd {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        flex-basis: 200px;
+        padding: 20px;
+        margin: 10px 20px;
+        height: 360px;
+        background: $bg-secundary;
+        text-align: center;
+        cursor: pointer;
+        img {
+            max-width: 100%;
+            max-height: 160px;
+        }
+        h3 {
+            margin: 20px 0;
+            color: $clr-primary;
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+        span.author {
+            color: $clr-tertiary;
+            font-size: 21px
+        }
+        span.year {
+            color: $clr-tertiary;
+        }
+    }
+}
+
